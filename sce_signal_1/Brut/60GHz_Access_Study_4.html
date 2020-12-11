@@ -1,0 +1,440 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7" />
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    <meta name="viewport" content="width=1024">
+    <title>Coverage Prediction Report</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/navbar-fixed-side.css">
+</head>
+<body>
+    <script src="js/jQuery1.9.1"></script>
+    <script src="d3/d3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div id="summary" class="col-sm-2 col-md-2">
+                <nav class="navbar navbar-default navbar-fixed-side">
+                    <div class="container">
+                        <div id="LeftPanelCat">
+                            <h1>Summary</h1>
+                        </div>
+                        <div id="LeftPanelContent">
+                            <div class="settings">
+                                <div class="settingTitle">Total Tx Number</div>
+                                <div class="settingValue">45</div>
+                            </div>
+                            <div class="settings">
+                                <div class="settingTitle">Frequency</div>
+                                <div class="settingValue">28 GHz</div>
+                            </div>
+                            <div class="settings">
+                                <div class="settingTitle">Study area</div>
+                                <div class="settingValue">Detroit</div>
+                            </div>
+                        </div>
+                        <div id="switchSurfacePop">
+                            <div class="col-md-12" style="margin-bottom: 15px;">
+                                <button class="btn-switch btn selected" type="button" id="surfaceBtn">Surface</button>
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn btn-switch" type="button" id="buildingStatsBtn">Building stats</button>
+                            </div>
+                        </div>
+                        <div class="media" id="reportInformations">
+                            <ul id="reportInformationsList" class="list-group col-md-12">
+                                <li class="list-group-item"><img class="media-object" src="Icons/Date.png" /><!--<span><b>Date :</b>--> <span id="ReportDate"></span></li>
+                                <li class="list-group-item"><img class="media-object" src="Icons/ComputationTime.png" /><!--<span><b>Date :</b>--> <span id="ReportComputationTime"></span></li>
+                                <li class="list-group-item"><img class="media-object" src="Icons/SBackhaulVersion.png" /><!--<b>S_Backhaul version :</b>--> <span id="ReportS_backhaulVersion"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <div id="bodyContent" class="col-sm-10 col-md-10 col-lg-offset-1 col-lg-8">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12" id="reportTitle">
+                        <h1 id="ReportName">Demo report 5.4.1</h1>
+                    </div>
+                </div>
+
+                <div class="row cat" id="ResultsCat">
+                    <h2>Network performance</h2>
+                </div>
+                <div class="row content" id="ResultsContent">
+                    <div class="row title">
+                        <div class="col-sm-6 col-md-6">
+                            <h3 id="GNPCat">Global</h3>
+                        </div>
+                    </div>
+
+                    <div class="row fullLineContainer">
+                        <div class="resultContainer" id="GlNetworkPerfCoverageDLContainer">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="chartButtonMenu" id="GlNetworkPerfCoverageDLMenuButton"></div>
+                                    <div class="chartTitle" id="GlNetworkPerfCoverageDLTitle"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="chart popSurface" id="GlNetworkPerfCoverageDLChart"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 tableRow disabled" id="GlNetworkPerfCoverageDLTableContainer">
+                                    <div style="overflow-y : auto;max-height:300px;">
+                                        <table class="colorTable chartTable col-md-12 popSurface" id="GlNetworkPerfCoverageDLTable"></table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row fullLineContainer">
+                        <div class="resultContainer" id="GlNetworkPerfCoverageULContainer">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="chartButtonMenu" id="GlNetworkPerfCoverageULMenuButton"></div>
+                                    <div class="chartTitle" id="GlNetworkPerfCoverageULTitle"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="chart popSurface" id="GlNetworkPerfCoverageULChart"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 tableRow disabled" id="GlNetworkPerfCoverageULTableContainer">
+                                    <div style="overflow-y : auto;max-height:300px;">
+                                        <table class="colorTable chartTable col-md-12 popSurface" id="GlNetworkPerfCoverageULTable"></table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row fullLineContainer">
+                        <div class="resultContainer" id="GlNetworkPerfReceivedPowerDLContainer">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="chartButtonMenu" id="GlNetworkPerfReceivedPowerDLMenuButton"></div>
+                                    <div class="chartTitle" id="GlNetworkPerfReceivedPowerDLTitle"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="chart popSurface" id="GlNetworkPerfReceivedPowerDLChart"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 tableRow disabled" id="GlNetworkPerfReceivedPowerDLTableContainer">
+                                    <div style="overflow-y : auto;max-height:300px;">
+                                        <table class="colorTable chartTable col-md-12 popSurface" id="GlNetworkPerfReceivedPowerDLTable"></table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row fullLineContainer">
+                        <div class="resultContainer" id="GlNetworkPerfReceivedPowerULContainer">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="chartButtonMenu" id="GlNetworkPerfReceivedPowerULMenuButton"></div>
+                                    <div class="chartTitle" id="GlNetworkPerfReceivedPowerULTitle"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="chart popSurface" id="GlNetworkPerfReceivedPowerULChart"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 tableRow disabled" id="GlNetworkPerfReceivedPowerULTableContainer">
+                                    <div style="overflow-y : auto;max-height:300px;">
+                                        <table class="colorTable chartTable col-md-12 popSurface" id="GlNetworkPerfReceivedPowerULTable"></table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row fullLineContainer">
+                        <div class="resultContainer" id="GlNetworkPerfSINRWithMarginsDLContainer">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="chartButtonMenu" id="GlNetworkPerfSINRWithMarginsDLMenuButton"></div>
+                                    <div class="chartTitle" id="GlNetworkPerfSINRWithMarginsDLTitle"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="chart popSurface" id="GlNetworkPerfSINRWithMarginsDLChart"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 tableRow disabled" id="GlNetworkPerfSINRWithMarginsDLTableContainer">
+                                    <div style="overflow-y : auto;max-height:300px;">
+                                        <table class="colorTable chartTable col-md-12 popSurface" id="GlNetworkPerfSINRWithMarginsDLTable"></table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row fullLineContainer">
+                        <div class="resultContainer" id="GlNetworkPerfSINRWithMarginsULContainer">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="chartButtonMenu" id="GlNetworkPerfSINRWithMarginsULMenuButton"></div>
+                                    <div class="chartTitle" id="GlNetworkPerfSINRWithMarginsULTitle"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="chart popSurface" id="GlNetworkPerfSINRWithMarginsULChart"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 tableRow disabled" id="GlNetworkPerfSINRWithMarginsULTableContainer">
+                                    <div style="overflow-y : auto;max-height:300px;">
+                                        <table class="colorTable chartTable col-md-12 popSurface" id="GlNetworkPerfSINRWithMarginsULTable"></table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row content" id="PerHubPerformanceContent">
+                    <div class="row fullLineContainer">
+                        <div class="resultContainer">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="chartButtonMenu" id="PerHubPerformanceMenuButton"></div>
+                                    <div class="chartTitle" id="PerHubPerformanceTitle"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="chart" id="PerHubPerformanceChart"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="chartLegend secondaryLegend" id="PerHubPerformanceLegend"></div>
+                                </div>
+                            </div>
+                            <div class="row" style="overflow-y : auto">
+                                <div class="col-md-12 tableRow disabled" id="PerHubPerformanceTableContainer">
+                                    <div style="overflow-y : auto;margin-bottom : 15px;height: 218px;">
+                                        <table class="colorTable chartTable col-md-12" id="PerHubPerformanceTable"></table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row content" id="OpticalVisibilityPerformanceContent">
+                    <div class="row fullLineContainer">
+                        <div class="resultContainer">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="chartButtonMenu" id="OpticalVisibilityPerformanceMenuButton"></div>
+                                    <div class="chartTitle" id="OpticalVisibilityPerformanceTitle"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="chart" id="OpticalVisibilityPerformanceChart"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="chartLegend secondaryLegend" id="OpticalVisibilityPerformanceLegend"></div>
+                                </div>
+                            </div>
+                            <div class="row" style="overflow-y : auto">
+                                <div class="col-md-12 tableRow disabled" id="OpticalVisibilityPerformanceTableContainer">
+                                    <div style="overflow-y : auto;margin-bottom : 15px;height: 218px;">
+                                        <table class="colorTable chartTable col-md-12" id="OpticalVisibilityPerformanceTable"></table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row cat" id="PredictionCat">
+                    <h2>Prediction settings</h2>
+                </div>
+                <div class="row content" id="PredictionContent">
+                    <div class="row multiContainer">
+                        <div class="col-md-12">
+                            <div class="resultContainer">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="settingTitle">Total surface</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="settingTitle NumberOfHomes">Number of homes</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="settingTitle">Prediction step</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="settingTitle">Modulation-covered #homes</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="settingTitle">LoS-covered #homes</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="settingValue" id="TotalSurface">N/A</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="settingValue NumberOfHomes" id="NumberOfHomes">N/A</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="settingValue" id="PredictionStep">N/A</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="settingValue" id="HeightReference">N/A</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="settingValue" id="Standard">N/A</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row cat" id="InputsCat">
+                    <h2 id="input">Inputs</h2>
+                </div>
+                <div class="row content" id="InputsContent">
+                    <div class="row fullLineContainer">
+                        <div class="inputTable">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="chartTitle" id="RemoteSettingsTitle">No selected Hubs</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 tableRow">
+                                    <div style="overflow-x : auto; max-height: 500px;">
+                                        <table class="colorTable col-sm-12 col-md-12 table-responsive table-condensed" id="RemoteSettingsTable"></table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row fullLineContainer">
+                        <div class="inputTable">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="chartTitle" id="HubsSettingsTitle">No selected Hubs</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 tableRow">
+                                    <div style="overflow-x : auto; max-height: 500px;">
+                                        <table class="colorTable col-sm-12 col-md-12 table-responsive table-condensed" id="HubsSettingsTable"></table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1 CSVFile" id="NoHub">No selected Hubs at the end of the optimization process.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col-sm-12 col-md-12">
+                    <ul class="list-group inputTable">
+                        <li class="list-group-item">
+                            <h5>Hub_1 - Site_1</h5>
+                            <div class="row">
+                                <div class="col-md-9" style="font-size: small;"><i>Equipment Hub LoRaWan</i></div>
+                                <div class="col-md-3" style="font-size: small;"><i>Prediction model Volcano</i></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-9" style="font-size: small;"><i>Standard LoRaWan</i></div>
+                                <div class="col-md-3" style="font-size: small;"><i>Prediction radius 10.00km</i></div>
+                            </div>
+                            <div class="row" style="margin-top:15px">
+                                <div class="col-md-2">
+                                    <table class="colorTable">
+                                        <tr>
+                                            <th>X(m)</th>
+                                            <td>550689.86</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Y(m)</th>
+                                            <td>4181025.10</td>
+                                        </tr>
+                                        <tr>
+                                            <th>H(m)</th>
+                                            <td>20.00</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-5 ">
+                                    <table class="colorTable">
+                                        <tr>
+                                            <th colspan="5">Half wave antenna</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Gain(dBi)</th>
+                                            <th>Cable loss (dB)</th>
+                                            <th>Connector loss (dB)</th>
+                                            <th>Azimuth (deg)</th>
+                                            <th>Downtilt (deg)</th>
+                                        </tr>
+                                        <tr>
+                                            <td>3.00</td>
+                                            <td>0.00</td>
+                                            <td>0.00</td>
+                                            <td>0.00</td>
+                                            <td>0.00</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-5 ">
+                                    <table class="colorTable">
+                                        <tr>
+                                            <th colspan="2">Transmitter</th>
+                                            <th colspan="3">Receiver</th>
+                                        </tr>
+                                        <tr>
+                                            <th>TxPower(dBm)</th>
+                                            <th>EIRP (dBm)</th>
+                                            <th>Noise figure (dB)</th>
+                                            <th>Noise level (dBm)</th>
+                                            <th>Noise rise(dB)</th>
+                                        </tr>
+                                        <tr>
+                                            <td>24.00</td>
+                                            <td>27.00</td>
+                                            <td>3.00</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    <footer class="reportFooter">
+        <div id="copyright"></div>
+    </footer>
+
+
+    <script src="js/dataset.js"></script>
+    <script src="js/chartsD3.js"></script>
+</body>
+</html>
